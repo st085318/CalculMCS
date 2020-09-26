@@ -32,35 +32,36 @@ class Calculator:
         except BaseException:
             return -1
 
-    def power(self, n):
+    def power(self, degree):
         try:
             value = self.value
-            n = int(n)
+            degree = int(degree)
             if self.value != 0:
-                if n == 0:
+                if degree == 0:
                     self.value = 1
-                elif n < 0:
+                elif degree < 0:
                     calc = Calculator(self.value)
-                    self.value = 1 / calc.power(-n).value
-                else:
-                    for i in range(n-1):
+                    self.value = 1 / calc.power().value
+                else:  # degree is natural, so we multiply self degree times
+                    for i in range(degree-1):
                         self.value = self.value * value
                 return self
+            return self
         except BaseException:
             self.value = value
             return self
 
-    def sqrt(self):
+    def root(self):
         try:
             if self.value < 0:
-                return self
-            elif 1 > self.value > 0:
+                return self  # can not root from negative number
+            elif 1 > self.value > 0:  # l = left, r = right border
                 l = 0
                 r = 1
             else:
                 r = self.value
                 l = 0
-            while r - l > 0.000000000001:
+            while r - l > 0.000000000001:  # binary search
                 if (r + l) / 2 * (r + l) / 2 < self.value:
                     l = (r+l)/2
                 elif (r + l) / 2 * (r + l) / 2 > self.value:
@@ -83,16 +84,4 @@ class Calculator:
     def __str__(self):
         return str(self.value)
 
-
-
-
-if __name__ == '__main__':
-    calculator = Calculator(2)
-    #print(calculator)
-    #print(calculator.add(1, 2, 3, 5.1).multiply(4, 0.123).subtract(4, 1, -100).divide(5, integer_divide=True))
-    print(calculator.power(-2).value)
-    #print(Calculator(100) + 10)
-    #print(10 + Calculator(12))
-    #print(Calculator(123) - Calculator(14))
-    #print(Calculator(14) / Calculator(2))
 

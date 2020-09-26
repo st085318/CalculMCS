@@ -21,7 +21,7 @@ class TestCalculator(unittest.TestCase):
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.divide(2, 3).value, calc_value / 6)
         calc_value = self.calculator.value
-        self.assertAlmostEqual(self.calculator.sqrt().value, math.sqrt(calc_value))
+        self.assertAlmostEqual(self.calculator.root().value, math.sqrt(calc_value))
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.power(2).value, math.pow(calc_value, 2))
         calc_value = self.calculator.value
@@ -60,21 +60,21 @@ class TestCalculator(unittest.TestCase):
     def test_divide_zero(self):
         self.assertRaises(BaseException, self.calculator.divide(0))
 
-    def test_sqrt_normal(self):
+    def test_root_normal(self):
         calc_value = self.calculator.value
-        self.assertAlmostEqual(self.calculator.sqrt().value, math.sqrt(calc_value))
+        self.assertAlmostEqual(self.calculator.root().value, math.sqrt(calc_value))
         self.calculator.value = 0.25
-        self.assertAlmostEqual(self.calculator.sqrt().value, 0.5)
+        self.assertAlmostEqual(self.calculator.root().value, 0.5)
         self.calculator.value = 4
-        self.assertAlmostEqual(self.calculator.sqrt().value, 2)
+        self.assertAlmostEqual(self.calculator.root().value, 2)
         self.calculator.value = 13
-        self.assertAlmostEqual(self.calculator.sqrt().value, math.sqrt(13))
+        self.assertAlmostEqual(self.calculator.root().value, math.sqrt(13))
         self.calculator.value = -0.25
-        self.assertEqual(self.calculator.sqrt().value, -0.25)
+        self.assertEqual(self.calculator.root().value, -0.25)
 
-    def test_sqrt_type(self):
+    def test_root_type(self):
         self.calculator.value = "sd"
-        self.assertRaises(BaseException, self.calculator.sqrt())
+        self.assertRaises(BaseException, self.calculator.root())
 
     def test_power_normal(self):
         self.calculator.value = 1
