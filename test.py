@@ -10,7 +10,7 @@ class TestCalculator(unittest.TestCase):
         a = random.randint(1, 10000)
         self.calculator = Calculator(a)
 
-    def test_random(self):
+    def test_random(self):  # tests in random start value
         print(datetime.now())
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.add(1, 2, 3).value, calc_value + 6)
@@ -27,40 +27,40 @@ class TestCalculator(unittest.TestCase):
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.add(1).multiply(9).divide(3).power(2).value, (calc_value+1)*(calc_value+1)*9)
 
-    def test_add(self):
+    def test_add(self):  # normal tests on add
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.add(1, 2, 3).value, calc_value + 6)
         self.assertRaises(BaseException, self.calculator.add("adad"))
         self.calculator.value = "12"
         self.assertRaises(BaseException, self.calculator.add(1))
 
-    def test_add_type(self):
+    def test_add_type(self):  # tests with bad type on add
         self.assertRaises(BaseException, self.calculator.add("happy"))
         self.calculator.value = "sad"
         self.assertRaises(BaseException, self.calculator.add(1))
 
-    def test_mul(self):
+    def test_mul(self):  # normal tests on multiplication
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.multiply(5, 2, 90).value, calc_value * 900)
 
-    def test_mul_type(self):
+    def test_mul_type(self):  # tests with bad type on multiplication
         self.assertRaises(BaseException, self.calculator.multiply("happy"))
         self.calculator.value = "sad"
         self.assertRaises(BaseException, self.calculator.multiply(1))
 
-    def test_divide(self):
+    def test_divide(self):  # normal tests on division
         calc_value = self.calculator.value
         self.assertEqual(self.calculator.divide(2, 3).value, calc_value / 6)
 
-    def test_divide_type(self):
+    def test_divide_type(self):  # tests with bad type on division
         self.assertRaises(BaseException, self.calculator.divide("happy"))
         self.calculator.value = "sad"
         self.assertRaises(BaseException, self.calculator.divide(1))
 
-    def test_divide_zero(self):
+    def test_divide_zero(self):  # tests with zero division on division
         self.assertRaises(BaseException, self.calculator.divide(0))
 
-    def test_root_normal(self):
+    def test_root_normal(self):  # normal teats on root
         calc_value = self.calculator.value
         self.assertAlmostEqual(self.calculator.root().value, math.sqrt(calc_value))
         self.calculator.value = 0.25
@@ -72,11 +72,11 @@ class TestCalculator(unittest.TestCase):
         self.calculator.value = -0.25
         self.assertEqual(self.calculator.root().value, -0.25)
 
-    def test_root_type(self):
+    def test_root_type(self):  # tests with bad type on root
         self.calculator.value = "sd"
         self.assertRaises(BaseException, self.calculator.root())
 
-    def test_power_normal(self):
+    def test_power_normal(self):  # normal teats on power
         self.calculator.value = 1
         self.assertEqual(self.calculator.power(10).value, 1)
         self.calculator.value = 2
@@ -86,7 +86,7 @@ class TestCalculator(unittest.TestCase):
         self.calculator.value = 0.5
         self.assertEqual(self.calculator.power(2).value, 0.25)
 
-    def test_power_type(self):
+    def test_power_type(self):  # tests with bad type on power
         self.calculator.value = 12
         self.assertRaises(BaseException, self.calculator.power("two"))
         self.calculator.value = "one"
